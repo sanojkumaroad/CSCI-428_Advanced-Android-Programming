@@ -7,10 +7,7 @@ import android.view.View;
 public class MainActivity extends Activity {
 
     Stoplight stoplight;
-    View redLightView = findViewById(R.id.redLight);
-    View yellowLightView = findViewById(R.id.yellowLight);
-    View greenLightView = findViewById(R.id.greenLight);
-
+   
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,6 +20,10 @@ public class MainActivity extends Activity {
       and turns that light off, then turns on the next one */
     public void start()
     {
+        View redLightView = findViewById(R.id.redLight);
+        View yellowLightView = findViewById(R.id.yellowLight);
+        View greenLightView = findViewById(R.id.greenLight);
+
         if(stoplight.redLightOn(redLightView))
         {
             redLightView.setBackgroundColor(getResources().getColor(R.color.darkRed));
