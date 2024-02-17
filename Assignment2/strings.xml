@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Stoplight</string>
+    <string name="buttonLabel">Change Light</string>
+</resources>
