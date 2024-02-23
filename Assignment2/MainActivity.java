@@ -4,7 +4,7 @@
  * App Name: Stoplight                           *
  * Class Name: MainActivity.java                 *
  * Developer: Alyssa Romero (Z1976871)           *
- *            Sanoj Oad                          *
+ *            Sanoj Oad (Z1980626)               *
  * Due Date: 2/23/2024                           *
  * Purpose: The MainActivity class sets the      *
  *          view and contains the method that    *
