@@ -1,10 +1,10 @@
-/*************************************************
+/************************************************
  * CSCI 428      Assignment 2        Spring 2024 *
  *                                               *
  * App Name: Stoplight                           *
  * Class Name: MainActivity.java                 *
  * Developer: Alyssa Romero (Z1976871)           *
- *            Sanoj Oad (Z1980626)               *
+ *            Sanoj Oad                          *
  * Due Date: 2/23/2024                           *
  * Purpose: The MainActivity class sets the      *
  *          view and contains the method that    *
@@ -44,17 +44,17 @@ public class MainActivity extends Activity {
 
         if(stoplight.redLightOn(redLightView))
         {
-            redLightView.setBackgroundColor(getResources().getColor(R.color.darkRed));
+            redLightView.setBackgroundColor(getResources().getColor(R.color.transparent));
             greenLightView.setBackgroundColor(getResources().getColor(R.color.green));
         }
         else if(stoplight.yellowLightOn(yellowLightView))
         {
-            yellowLightView.setBackgroundColor(getResources().getColor(R.color.darkYellow));
+            yellowLightView.setBackgroundColor(getResources().getColor(R.color.transparent));
             redLightView.setBackgroundColor(getResources().getColor(R.color.red));
         }
         else if(stoplight.greenLightOn(greenLightView))
         {
-            greenLightView.setBackgroundColor(getResources().getColor(R.color.darkGreen));
+            greenLightView.setBackgroundColor(getResources().getColor(R.color.transparent));
             yellowLightView.setBackgroundColor(getResources().getColor(R.color.yellow));
         }
     }
