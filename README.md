@@ -1,1 +1,1 @@
-# CSCI-428_Advanced-Android-Programming-
+# CSCI-428_Advanced-Android-Programming
