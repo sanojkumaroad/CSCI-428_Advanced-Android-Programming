@@ -1,3 +1,17 @@
+/************************************************
+ * CSCI 428      Assignment 3        Spring 2024 *
+ *                                               *
+ * App Name: Add Two                             *
+ * Class Name: MainActivity.java                 *
+ * Developer: Alyssa Romero (Z1976871)           *
+ *            Sanoj Oad (Z1980626)               *
+ * Due Date: 03/08/2024                          *
+ * Purpose: The MainActivity class creates an    *
+ *          Intent for speech input, creates an  *
+ *          equation for the user to solve, and  *
+ *          displays whether the solution is     *
+ *          right or wrong                       *
+ ************************************************/
 package edu.niu.android.voicerecognition;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -101,29 +115,19 @@ public class MainActivity extends AppCompatActivity
             //a match is returned
             String match = values.firstMatchWithMinConfidence(returnedWords, scores);
 
-            /*int i = 0;
-            for(String word: returnedWords)
-            {
-                if(scores != null && i < scores.length)
-                {
-                    Log.w("MainActivity", word + ": " + scores[i]);
-                }
-                i++;
-            }*/
 
-            //Log.w("MainActivity", "Input: " + match);
-            //Log.w("MainActivity", "Sum: " + String.valueOf(sum));
+            int userAnswer = Integer.parseInt(match);
 
             /*compares the match returned by firstMatchWithMinConfidence() to the sum of the integers
               and prints the appropriate message*/
-            if(String.valueOf(sum) == match)
+            if (userAnswer == sum)
             {
-                Toast.makeText(this, "CORRECT!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "CORRECT!", Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(this, "INCORRECT!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "WRONG!", Toast.LENGTH_SHORT).show();
             }
         }
-     }
+    }
 }
