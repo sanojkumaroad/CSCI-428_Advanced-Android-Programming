@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
-import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -21,18 +19,21 @@ public class MainActivity extends AppCompatActivity
 {
     private static final int RESULT_REQUEST = 1;
     private Random randInt;
-    private TextView result;
-    private TextView intOne;
-    private TextView intTwo;
+    private TextView intOne; //the TextView representing the first integer
+    private TextView intTwo; //the TextView representing the second integer
 
-    private int firstInt;
-    private int secondInt;
-    private int sum;
+    private int firstInt; //the value of the first integer
+    private int secondInt; //the value of the second integer
+    private int sum; //the value of the sum of the two integers
+
+    public static Match values;
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        values = new Match(); //an object of the Match class
 
         //checks if device supports speech recognition
         PackageManager manager = getPackageManager();
@@ -49,8 +50,10 @@ public class MainActivity extends AppCompatActivity
             firstInt = randInt.nextInt(9);
             secondInt = randInt.nextInt(9);
 
-            intOne.setText(String.valueOf(firstInt));//TextView that displays the first operand
-            intTwo.setText(String.valueOf(secondInt));//TextView that displays the second operand
+            sum = firstInt + secondInt;
+
+            intOne.setText(String.valueOf(firstInt));//sets TextView that displays the first operand to the first integer
+            intTwo.setText(String.valueOf(secondInt));//sets TextView that displays the second operand to second integer
         }
         else
         { // if speech recognition not supported, a Toast appears
@@ -62,9 +65,9 @@ public class MainActivity extends AppCompatActivity
     public void listen(View view)
     {
         Intent listenIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        listenIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "What is the result?");
+        listenIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "What is the result?"); //adds a prompt to the microphone activity
         listenIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        listenIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
+        listenIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 10);
         startActivityForResult(listenIntent, RESULT_REQUEST);
     }
 
@@ -73,8 +76,6 @@ public class MainActivity extends AppCompatActivity
        or "INCORRECT!" back to " "*/
     public void setEquation(View view)
     {
-        result = findViewById(R.id.result); //TextView that displays whether the user was correct or incorrect
-
         //the two random integers are generated and stored in integer variables
         randInt = new Random();
         firstInt = randInt.nextInt(9);
@@ -83,7 +84,6 @@ public class MainActivity extends AppCompatActivity
         sum = firstInt + secondInt;
 
         //the 3 TextViews are set
-        result.setText(" ");
         intOne.setText(String.valueOf(firstInt));
         intTwo.setText(String.valueOf(secondInt));
     }
@@ -98,15 +98,31 @@ public class MainActivity extends AppCompatActivity
             // retrieve array of scores for returnedWords
             float [] scores = data.getFloatArrayExtra(RecognizerIntent.EXTRA_CONFIDENCE_SCORES);
 
-            // display results
-            int i = 0;
-            for (String word : returnedWords)
+            //a match is returned
+            String match = values.firstMatchWithMinConfidence(returnedWords, scores);
+
+            /*int i = 0;
+            for(String word: returnedWords)
             {
-                if (scores != null && i < scores.length)
+                if(scores != null && i < scores.length)
                 {
                     Log.w("MainActivity", word + ": " + scores[i]);
                 }
                 i++;
+            }*/
+
+            //Log.w("MainActivity", "Input: " + match);
+            //Log.w("MainActivity", "Sum: " + String.valueOf(sum));
+
+            /*compares the match returned by firstMatchWithMinConfidence() to the sum of the integers
+              and prints the appropriate message*/
+            if(String.valueOf(sum) == match)
+            {
+                Toast.makeText(this, "CORRECT!", Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(this, "INCORRECT!", Toast.LENGTH_LONG).show();
             }
         }
      }
