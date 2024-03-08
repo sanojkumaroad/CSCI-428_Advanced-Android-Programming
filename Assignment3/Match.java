@@ -1,3 +1,10 @@
+/************************************************
+ * Class Name: Match.java                       *
+ * Purpose: This class processes the possible   *
+ *          values of user input, and returns   *
+ *          the the most probable value based   *
+ *          on the minimum confidence level     *
+ ************************************************/
 package edu.niu.android.voicerecognition;
 
 import java.util.ArrayList;
